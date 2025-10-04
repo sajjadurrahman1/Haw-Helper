@@ -1,9 +1,11 @@
-
 """
 build_haw_kb_from_pdf.py
 
 Reads the HAW_Hamburg_Online_Services.xlsx, extracts all URLs from the Excel file,
-cleans/validates them, fetches page content, and builds a JSON knowledge base.
+fetches page content, detects language, and builds:
+- haw_kb.json (original)
+- haw_kb_en.json (English version)
+- haw_kb_de.json (German version, all texts translated)
 
 Run:
     python build_haw_kb_from_excel.py
@@ -16,10 +18,14 @@ import json
 import re
 from datetime import datetime, timezone
 from urllib.parse import urlparse
+import langid
+from deep_translator import GoogleTranslator  # ✅ simpler and synchronous
 
 
 EXCEL_PATH = "HAW_Hamburg_Online_Services.xlsx"
-OUTPUT_JSON = "haw_kb.json"
+OUTPUT_JSON_ALL = "haw_kb.json"
+OUTPUT_JSON_EN = "haw_kb_en.json"
+OUTPUT_JSON_DE = "haw_kb_de.json"
 
 
 # ------------------- URL Handling -------------------
@@ -74,14 +80,30 @@ def split_text_into_chunks(text, chunk_size=500):
     return chunks
 
 
+def detect_language(text):
+    """Detects whether a text is English or German."""
+    if not text.strip():
+        return "unknown"
+    lang, confidence = langid.classify(text)
+    return lang
+
+
+def translate_text(text, target_lang):
+    """Translate text to target language (en or de) using deep_translator."""
+    try:
+        translated = GoogleTranslator(source="auto", target=target_lang).translate(text)
+        return translated
+    except Exception as e:
+        return f"[Translation failed: {e}] {text}"
+
+
 # ------------------- Build KB -------------------
-def build_kb(excel_path, output_path):
+def build_kb(excel_path, output_path_all, output_path_en, output_path_de):
     raw_data = extract_urls_from_excel(excel_path)
-    cleaned = [(label, u) for label, u in raw_data]
-    unique_urls = list(dict.fromkeys([u for _, u in cleaned]))  # deduplicate while keeping order
+    urls = list(dict.fromkeys([u for _, u in raw_data]))  # deduplicate while keeping order
 
     kb = []
-    for label, url in cleaned:
+    for label, url in raw_data:
         if not is_valid_url(url):
             print(f"Skipping invalid URL: {url}")
             kb.append({
@@ -91,6 +113,7 @@ def build_kb(excel_path, output_path):
                 "status": "invalid",
                 "chunk_id": None,
                 "text": "",
+                "language": "unknown",
                 "error": "Invalid URL"
             })
             continue
@@ -101,6 +124,7 @@ def build_kb(excel_path, output_path):
         if text:
             chunks = split_text_into_chunks(text, chunk_size=500)
             for idx, chunk in enumerate(chunks):
+                lang = detect_language(chunk)
                 entry = {
                     "url": url,
                     "title": label,
@@ -108,6 +132,7 @@ def build_kb(excel_path, output_path):
                     "status": "success",
                     "chunk_id": idx,
                     "text": chunk,
+                    "language": lang,
                     "error": "",
                 }
                 kb.append(entry)
@@ -119,15 +144,50 @@ def build_kb(excel_path, output_path):
                 "status": "error",
                 "chunk_id": None,
                 "text": "",
+                "language": "unknown",
                 "error": error if error else "",
             }
             kb.append(entry)
 
-    with open(output_path, "w", encoding="utf-8") as f:
+    # Save combined version
+    with open(output_path_all, "w", encoding="utf-8") as f:
         json.dump(kb, f, ensure_ascii=False, indent=2)
 
-    print(f"\n✅ Knowledge base saved to {output_path} with {len(kb)} entries.")
+    # Build translated English and German versions
+    kb_en = []
+    kb_de = []
+
+    print("\nTranslating all texts to English and German...")
+
+    for entry in kb:
+        text = entry["text"]
+
+        # English version (translate everything to English)
+        translated_en = translate_text(text, "en")
+
+        # German version (translate everything to German)
+        translated_de = translate_text(text, "de")
+
+        en_entry = dict(entry)
+        en_entry["text"] = translated_en
+        en_entry["language"] = "en"
+        kb_en.append(en_entry)
+
+        de_entry = dict(entry)
+        de_entry["text"] = translated_de
+        de_entry["language"] = "de"
+        kb_de.append(de_entry)
+
+    with open(output_path_en, "w", encoding="utf-8") as f:
+        json.dump(kb_en, f, ensure_ascii=False, indent=2)
+    with open(output_path_de, "w", encoding="utf-8") as f:
+        json.dump(kb_de, f, ensure_ascii=False, indent=2)
+
+    print(f"\n✅ Knowledge bases saved:")
+    print(f"  - Original: {output_path_all} ({len(kb)} entries)")
+    print(f"  - English:  {output_path_en} ({len(kb_en)} entries)")
+    print(f"  - German:   {output_path_de} ({len(kb_de)} entries)")
 
 
 if __name__ == "__main__":
-    build_kb(EXCEL_PATH, OUTPUT_JSON)
+    build_kb(EXCEL_PATH, OUTPUT_JSON_ALL, OUTPUT_JSON_EN, OUTPUT_JSON_DE)
