@@ -1,0 +1,28 @@
+[
+  {
+    "url": "https://myhaw.haw-hamburg.de/qisserver/pages/cs/sys/portal/hisinoneStartPage.faces",
+    "title": "myhaw.haw-hamburg.de",
+    "fetched_at": "2025-09-30T18:24:11.104171+00:00",
+    "status": "success",
+    "chunk_id": 0,
+    "text": "myHAW - das Bewerbungs- und Studierendenportal der HAW Hamburg - myHAW Zur Seitennavigation (Tastenkombination SHIFT+ALT+ o) Zum Seiteninhalt (Tastenkombination SHIFT+ALT + i) Benutzerkennung Passwort Angemeldet bleiben Navigation Sie befinden sich hier: Startseite Bewerbung Zur nächsten Navigationsebene Zurück zu Hauptmenü Bewerbung Registrierung E-Mail-Verifikation Service Zur nächsten Navigationsebene Zurück zu Hauptmenü Service Information zur barrierefreien Bedienung English Impressum Datenschutz Barrierefreiheit Leichte Sprache Gebärdensprache Struktur dieses Webangebots Schließen [ESC] HAW-Login (SSO) Bewerber/in-Login Zugangsdaten vergessen? Navigation zu- und aufklappen Sie befinden sich hier: Startseite Bewerbung Zur nächsten Navigationsebene Zurück zu Hauptmenü Bewerbung Registrierung E-Mail-Verifikation Service Zur nächsten Navigationsebene Zurück zu Hauptmenü Service Information zur barrierefreien Bedienung English Impressum Datenschutz Barrierefreiheit Leichte Sprache Gebärdensprache Struktur dieses Webangebots Open Inhalt myHAW - das Bewerbungs- und Studierendenportal der HAW Hamburg Home Aktive Registerkarte Bewerbung Studium Beschäftigte Willkommen bei myHAW Liebe Nutzerinnen und Nutzer, herzlich willkommen beim Studierendenportal myHAW der Hochschule für Angewandte Wissenschaften Hamburg! Portalauswahl Portalauswahl Bewerbung Sie haben sich für ein Studium entschieden und möchten sich informieren oder sich für einen Studienplatz bewerben. Studium Sie studieren bereits und möchten Ihre Noten einsehen oder Bescheide herunterladen. Beschäftigte Sie sind an der Hochschule beschäftigt und möchten z.B. Ihre persönlichen Daten pflegen, Noten eintragen oder Veranstaltungen pflegen. Campusleben Campusleben Studierendenwerk Hamburg Das Service-Portal für das Studium in Hamburg AStA Allgemeiner Studierendenausschuss Zentrale Studienberatung Beratung und Unterstützung im Studium International Office International studieren - in Hamburg oder im Ausland Team Studieneinstieg Erfolgreich studieren Alumni In Verbindung bleiben Online-Services Moodle, WLAN, SSO-Zugang uvm... HIBS Hochschulinformations- & Bibliotheksservice HAW E-Mail Postfach Weboutlook für Studierende und Beschäftigte Kultur und Sport Interkulturelle Projekte & Hochschulsport Projekte Studentische Projekte & Initiativen Verifikation Verifikation von Dokumenten & Bescheiden Wichtige Hinweise Wichtige Hinweise Semestertickets für das WiSe 2025/26 Die Semestertickets für das Wintersemester 2025/26 stehen 5 Tage vor Semesterbeginn im Ride Portal zur Verfügung. [mehr...] VPN-Dienst für Angehörige der HAW Hamburg Bestimmte Server-Dienste an der HAW Hamburg sind aus Gründen der Netzwerk- und Systemsicherheit nur aus dem internen Netzwerk der HAW Hamburg erreichbar. [mehr...] Anmeldung (Login) myHAW HAW Angehörige können sich nur noch über den blauen Button (Single Sign-On; SSO) anmelden. [ mehr... ] BundID Leider hat hier etwas nicht geklappt ... ... um die Inhalte zu sehen, laden Sie bitte die Seite neu Standardsprache Deutsch English Impressum Datenschutz Information zur barrierefreien Bedienung Barrierefreiheit © HISinOne ist ein Produkt der HIS eG Generiert vom Knoten HAWPROD7 im Cluster HAWPRODCL. © HISinOne ist ein Produkt der HIS eG HISinOne als App installieren",
+    "error": ""
+  },
+  {
+    "url": "https://stwhh.de/wohnen/wohnanlagen",
+    "title": "stwhh.de",
+    "fetched_at": "2025-09-30T18:24:11.190523+00:00",
+    "status": "error",
+    "chunk_id": null,
+    "text": "",
+    "error": "Error fetching https://stwhh.de/wohnen/wohnanlagen: HTTPSConnectionPool(host='www.stwhh.dewohnen', port=443): Max retries exceeded with url: /wohnanlagen (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x0000015814F09BD0>: Failed to resolve 'www.stwhh.dewohnen' ([Errno 11001] getaddrinfo failed)\"))"
+  },
+  {
+    "url": "https://www.haw-",
+    "title": "www.haw-",
+    "fetched_at": "2025-09-30T18:24:11.215519+00:00",
+    "status": "error",
+    "chunk_id": null,
+    "text": "",
+    "error": "Error fetching https://www.haw-: HTTPSConnectionPool(host='www.haw-', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x0000015814F0A350>: Failed to resolve 'www.haw-' ([Errno 11001] getaddrinfo failed)\"))"
+  },
