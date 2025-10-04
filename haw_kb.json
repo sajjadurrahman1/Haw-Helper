@@ -26,3 +26,4 @@
     "text": "",
     "error": "Error fetching https://www.haw-: HTTPSConnectionPool(host='www.haw-', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x0000015814F0A350>: Failed to resolve 'www.haw-' ([Errno 11001] getaddrinfo failed)\"))"
   },
+  
